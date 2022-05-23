@@ -1,0 +1,16 @@
+{
+  "name": "truth-social-bot",
+  "version": "1.0.0",
+  "description": "Social Experiment on Truth - Automated Follow/Unfollow & Posting Random Sentence",
+  "type": "module",
+  "main": "truthBot.js",
+  "scripts": {
+    "truthbot": "node truthBot.js"
+  },
+  "author": "Skollie",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^16.0.1",
+    "puppeteer": "^14.1.1"
+  }
+}
