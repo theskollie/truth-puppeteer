@@ -6,7 +6,7 @@ A social experiment with Javascript Puppeteer headless Chromium browser automati
 
 ## How it works
 
-Essentially, the bot is in a constant state of unfollowing/following the accounts in the given array. This allows you to stay in the top of the followers list of high profile accounts. <br/>
+Essentially, the bot is in a constant state of unfollowing/following the accounts in the given array. This allows you to stay in the top of the followers list of high profile accounts. The bot will also follow from their top 10 most recent followers, as well as unfollow accounts after a duration. <br/>
 The bot will also post a tweet containing a random sentence from an [API](https://fungenerators.com/random/sentence) after looping reFollow (x) times and then restart.
 
 ## Languages

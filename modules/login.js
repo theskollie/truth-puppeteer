@@ -8,4 +8,5 @@ export async function login(page) {
   await page.click(".flex.justify-end [data-testid=button]");
   await page.waitForSelector(".mt-4 button");
   await page.waitForTimeout(3000);
+  console.log("Login Successful");
 }
