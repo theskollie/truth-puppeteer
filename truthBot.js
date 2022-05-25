@@ -20,7 +20,7 @@ async function main() {
 
   for(let i=0; i<accounts.length; i++) {
     await page.goto(accounts[i]);
-    await page.waitForSelector(".mt-10.flex button:nth-child(2)");
+    await page.waitForSelector(".mt-10.flex button:nth-child(2)", {timeout:60000});
     await page.$eval('.mt-10.flex button:nth-child(2)', (button) => {
       if(button.textContent !== "Unfollow") {
        button.click();
@@ -35,8 +35,10 @@ async function main() {
     while (runCount < process.env.FOLLOWCOUNT) {
       await reFollow(page);
       runCount++;
-      console.log("Switching to Unfollow");
-      await unfollow(page);
+      if(runCount % 2 === 0) {
+        console.log("Switching to Unfollow");
+        await unfollow(page);
+      }    
       console.log(
         `Run Count: ${runCount}/${process.env.FOLLOWCOUNT}`
       );

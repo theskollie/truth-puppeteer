@@ -13,10 +13,10 @@ export const unfollow = async (page) => {
       }
 
       await page.waitForSelector('div.pb-4');
-      await page.$$eval('div.pb-4', (allUsers) => 
-      allUsers.map((user) => {   
-            if(user.querySelector('button').textContent === 'Unfollow'){
-                user.querySelector('button').click();
+      await page.$$eval('div.pb-4', async (allUsers) => 
+      allUsers.map( async (user) => {   
+            if(await user.querySelector('button').textContent === 'Unfollow'){
+               await user.querySelector('button').click();
             }            
       })
     );
