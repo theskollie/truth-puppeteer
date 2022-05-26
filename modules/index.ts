@@ -2,11 +2,11 @@ import puppeteer from "puppeteer";
 import dotenv from "dotenv";
 dotenv.config();
 //Modules
-import { randomSentence } from "./modules/generateTweet.js";
-import { reFollow, accounts } from "./modules/reFollow.js";
-import { login } from "./modules/login.js";
-import {unfollow} from './modules/unfollow.js';
-import {famousQuote} from './modules/famousQuote.js';
+import { randomSentence } from "./generateTweet";
+import { reFollow, accounts } from "./reFollow";
+import { login } from "./login";
+import { unfollow } from './unfollow';
+import { famousQuote } from './famousQuote';
 
 async function main() {
   const browser = await puppeteer.launch({
@@ -19,12 +19,14 @@ async function main() {
   const page = await browser.newPage();
   await login(page);
 
-  for(let i=0; i<accounts.length; i++) {
+  for (let i = 0; i < accounts.length; i++) {
     await page.goto(accounts[i]);
-    await page.waitForSelector(".mt-10.flex button:nth-child(2)", {timeout:60000});
-    await page.$eval('.mt-10.flex button:nth-child(2)', (button) => {
-      if(button.textContent !== "Unfollow") {
-       button.click();
+    await page.waitForSelector(".mt-10.flex button:nth-child(2)", { timeout: 60000 });
+    await page.$eval('.mt-10.flex button:nth-child(2)', async (button) => {
+      if (button.textContent !== "Unfollow") {
+
+        // @ts-ignore
+        await button.click();
       }
     })
     await page.waitForTimeout(2000);
@@ -32,31 +34,36 @@ async function main() {
   console.log("Completed Initial Check");
 
   let runCount = 0;
-  const runLoop = async () => {
-    while (runCount < process.env.FOLLOWCOUNT) {
+  const loopCount = Number(process.env.FOLLOWCOUNT) || 50
+  const runLoop = async (famous: boolean) => {
+    while (runCount < loopCount) {
       await reFollow(page);
       runCount++;
-      if(runCount % 2 === 0) {
+      if (runCount % 2 === 0) {
         console.log("Switching to Unfollow");
         await unfollow(page);
-      }    
+      }
       console.log(
         `Run Count: ${runCount}/${process.env.FOLLOWCOUNT}`
       );
     }
-    runTweet();
+    runTweet(famous);
   };
 
-  const runTweet = async () => {
+
+  const runTweet = async (famous: boolean) => {
     console.log(`Starting New Tweet`);
     runCount = 0;
-    // await randomSentence(page);
-    await famousQuote(page);
+    if (famous) {
+      await famousQuote(page);
+    } else {
+      await randomSentence(page);
+    }
     console.log(`Switching to Follow`);
-    runLoop();
+    runLoop(!famous);
   };
   //Start Initial Script
-  runLoop();
+  runLoop(false);
 }
 
 main();

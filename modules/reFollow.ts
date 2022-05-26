@@ -1,5 +1,7 @@
-import {followUsers} from './followUsers.js';
+import { followUsers } from './followUsers';
 
+
+import { Page } from 'puppeteer';
 export const accounts = [
   "https://truthsocial.com/@DonaldJTrumpJr",
   "https://truthsocial.com/@realDonaldTrump",
@@ -7,13 +9,15 @@ export const accounts = [
   "https://truthsocial.com/@BabylonBee",
 ];
 
-export async function reFollow(page) {
+export async function reFollow(page: Page) {
   for (let i = 0; i < accounts.length; i++) {
     let currentUser = accounts[i].replace(/(.*?)@/, "");
     await page.goto(accounts[i]);
     //Follow/Unfollow Button
     await page.waitForTimeout(3000);
+
     await followUsers(page, currentUser);
+
     await page.waitForTimeout(5000);
     await page.click(".mt-10.flex button:nth-child(2)");
     console.log(`Unfollowed ${currentUser}: 10s Timeout Starting`);
