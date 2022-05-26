@@ -6,6 +6,7 @@ import { randomSentence } from "./modules/generateTweet.js";
 import { reFollow, accounts } from "./modules/reFollow.js";
 import { login } from "./modules/login.js";
 import {unfollow} from './modules/unfollow.js';
+import {famousQuote} from './modules/famousQuote.js';
 
 async function main() {
   const browser = await puppeteer.launch({
@@ -49,7 +50,8 @@ async function main() {
   const runTweet = async () => {
     console.log(`Starting New Tweet`);
     runCount = 0;
-    await randomSentence(page);
+    // await randomSentence(page);
+    await famousQuote(page);
     console.log(`Switching to Follow`);
     runLoop();
   };

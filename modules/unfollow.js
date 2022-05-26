@@ -5,7 +5,7 @@ export const unfollow = async (page) => {
       await following.evaluate((b) => b.click());
       await page.waitForTimeout(2000);
 
-      for(let i=0; i<3; i++) {
+      for(let i=0; i<4; i++) {
         await page.evaluate(async () => {
             window.scrollBy(0,1000); 
         })

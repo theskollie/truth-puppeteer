@@ -35,7 +35,7 @@ Follow Count is the amount of times the Refollow Script will run between posting
 
 **Selecting Accounts to Refollow:** <br/>
 Add accounts to refollow to the accounts array in reFollow.js.  
-Ensure that you are following all the accounts in the accounts array before starting the script.
+An initial check will run when script is started to ensure you're following all the accounts from the given array.
 
 **Headless Mode** <br/>
 By default, this will run headless, meaning you cannot see the browser running the operations in the background. <br/>
