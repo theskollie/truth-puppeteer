@@ -18,8 +18,8 @@ export async function randomSentence(page: Page) {
   await page.goto(`https://truthsocial.com/@${process.env.TRUTHUSER}`);
   const compose = await page.waitForSelector(".mt-4 button");
 
-  if(!compose) return;
-  compose.click();
+  if (!compose) return;
+  await compose.click();
   // await compose.evaluate(async (b) => await b.click());
   const textArea = await page.waitForSelector(".w-full textarea");
   await page.type("textarea#compose-textarea", `${randomSentence} #Truth`, {
@@ -27,9 +27,9 @@ export async function randomSentence(page: Page) {
   });
   const postTruth = await page.waitForSelector(".mt-2.w-full button.text-sm");
 
-  if(!postTruth) return;
+  if (!postTruth) return;
 
-  postTruth.click();
+  await postTruth.click();
   // await postTruth.evaluate( async (b) => await b.click());
   await page.waitForTimeout(1000);
   await page.goto(`https://truthsocial.com/@${process.env.TRUTHUSER}`);

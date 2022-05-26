@@ -1,4 +1,4 @@
-import {followUsers} from './followUsers';
+import { followUsers } from './followUsers';
 
 
 import { Page } from 'puppeteer';
@@ -17,6 +17,7 @@ export async function reFollow(page: Page) {
     await page.waitForTimeout(3000);
 
     await followUsers(page, currentUser);
+
     await page.waitForTimeout(5000);
     await page.click(".mt-10.flex button:nth-child(2)");
     console.log(`Unfollowed ${currentUser}: 10s Timeout Starting`);
