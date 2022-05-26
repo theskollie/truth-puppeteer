@@ -10,9 +10,9 @@ import { famousQuote } from './famousQuote';
 
 async function main() {
   const browser = await puppeteer.launch({
-    headless: false,
-    args: ["--window-size=1920,1080", "--disable-site-isolation-trials"],
-    defaultViewport: null,
+    // headless: false,
+    // args: ["--window-size=1920,1080", "--disable-site-isolation-trials"],
+    // defaultViewport: null,
   });
 
   console.log(`%c Script Starting! No further inputs required.`, "color: red");
