@@ -22,6 +22,7 @@ Using Puppeteer I am able to turn any website into an API that I can scrape data
 - `git clone https://github.com/theskollie/truth-puppeteer`
 - `cd truth-puppeteer`
 - `npm install`
+- `npm run build`
 - `npm run truthbot`
 
 **Before Initial Launch:** <br>
