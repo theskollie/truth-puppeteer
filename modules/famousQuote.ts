@@ -15,20 +15,14 @@ export async function famousQuote(page: Page) {
   await page.goto(`https://truthsocial.com/@${process.env.TRUTHUSER}`);
   const compose = await page.waitForSelector(".mt-4 button");
 
-  if (!compose) return;
-
-  // @ts-ignore
-  await compose.evaluate((b) => b.click());
+  await page.evaluate((b) => b.click(), compose);
   const textArea = await page.waitForSelector(".w-full textarea");
   await page.type("textarea#compose-textarea", `${randomSentence} - Donald Trump #Truth`, {
     delay: 50,
   });
   const postTruth = await page.waitForSelector(".mt-2.w-full button.text-sm");
 
-  if (!postTruth) return;
-
-  // @ts-ignore
-  await postTruth.evaluate(async (b) => await b.click());
+  await page.evaluate((b) => b.click(), postTruth);
 
 
   await page.waitForTimeout(1000);

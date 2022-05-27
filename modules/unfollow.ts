@@ -4,10 +4,7 @@ export const unfollow = async (page: Page) => {
   await page.goto(`https://truthsocial.com/@${process.env.TRUTHUSER}`);
   const following = await page.waitForSelector(`a[href="/@${process.env.TRUTHUSER}/following"]`);
 
-  if (!following) return;
-  //await following.click();
-  // @ts-ignore
-  await following.evaluate((b) => b.click());
+  await page.evaluate((b) => b.click(), following);
   await page.waitForTimeout(2000);
 
   for (let i = 0; i < 4; i++) {

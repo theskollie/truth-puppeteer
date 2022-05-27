@@ -6,9 +6,7 @@ export const followUsers = async (page: Page, user: string) => {
 
   const followers = await page.waitForSelector(`a[href="/@${user}/followers"]`);
 
-  if (!followers) return;
-  await followers.click();
-  // await followers.evaluate((b) => b.click());
+  await page.evaluate((b) => b.click(), followers);
   await page.waitForTimeout(3500);
   await page.$$eval('div.pb-4', async (allUsers) =>
     allUsers.map(async (user) => {

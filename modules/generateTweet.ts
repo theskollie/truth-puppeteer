@@ -17,21 +17,16 @@ export async function randomSentence(page: Page) {
 
   await page.goto(`https://truthsocial.com/@${process.env.TRUTHUSER}`);
   const compose = await page.waitForSelector(".mt-4 button");
+  await page.evaluate(async (b) => await b.click(), compose);
 
-  if (!compose) return;
-  // await compose.click();
-  // @ts-ignore
-  await compose.evaluate(async (b) => await b.click());
   const textArea = await page.waitForSelector(".w-full textarea");
   await page.type("textarea#compose-textarea", `${randomSentence} #Truth`, {
     delay: 50,
   });
   const postTruth = await page.waitForSelector(".mt-2.w-full button.text-sm");
 
-  if (!postTruth) return;
 
-  // @ts-ignore
-  await postTruth.evaluate((b) => b.click());
+  await page.evaluate((element) => element.click(), postTruth);
   await page.waitForTimeout(1000);
   await page.goto(`https://truthsocial.com/@${process.env.TRUTHUSER}`);
   await page.waitForTimeout(1000);
