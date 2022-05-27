@@ -17,8 +17,8 @@ export async function famousQuote(page: Page) {
 
   if (!compose) return;
 
-  compose.click();
-  // await compose.evaluate(async (b) => await b.click());
+  // @ts-ignore
+  await compose.evaluate((b) => b.click());
   const textArea = await page.waitForSelector(".w-full textarea");
   await page.type("textarea#compose-textarea", `${randomSentence} - Donald Trump #Truth`, {
     delay: 50,
@@ -27,8 +27,8 @@ export async function famousQuote(page: Page) {
 
   if (!postTruth) return;
 
-  postTruth.click();
-  // await postTruth.evaluate( async (b) => await b.click());
+  // @ts-ignore
+  await postTruth.evaluate(async (b) => await b.click());
 
 
   await page.waitForTimeout(1000);

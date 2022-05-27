@@ -5,8 +5,9 @@ export const unfollow = async (page: Page) => {
   const following = await page.waitForSelector(`a[href="/@${process.env.TRUTHUSER}/following"]`);
 
   if (!following) return;
-  following.click();
-  // await following.evaluate((b) => b.click());
+  //await following.click();
+  // @ts-ignore
+  await following.evaluate((b) => b.click());
   await page.waitForTimeout(2000);
 
   for (let i = 0; i < 4; i++) {
@@ -22,8 +23,8 @@ export const unfollow = async (page: Page) => {
       if (!user) return;
       const buttonContent = user.querySelector('button');
       if (buttonContent && buttonContent.textContent === 'Unfollow') {
-        await buttonContent.click();
-        // buttonContent.evaluate((b) => b.click());
+        // @ts-ignore
+        buttonContent.evaluate((b) => b.click());
       }
     })
   );
