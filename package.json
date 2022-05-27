@@ -4,7 +4,7 @@
   "description": "Social Experiment on Truth - Automated Follow/Unfollow & Posting Random Sentence",
   "main": "dist/index.js",
   "scripts": {
-    "truthbot": "node dist/index.js",
+    "truthbot": "npm run build && node dist/index.js",
     "build" : "tsc"
   },
   "author": "Skollie",

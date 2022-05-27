@@ -15,15 +15,20 @@ export const unfollow = async (page: Page) => {
   }
 
   await page.waitForSelector('div.pb-4');
-  await page.$$eval('div.pb-4', async (allUsers) =>
-    allUsers.map(async (user) => {
+  await page.$$eval('div.pb-4', async (allUsers) => {
+
+    // TODO - find some way to pass a message out of here to track total users and unfollow count.
+    for(let user of allUsers){
       if (!user) return;
       const buttonContent = user.querySelector('button');
       if (buttonContent && buttonContent.textContent === 'Unfollow') {
-        // @ts-ignore
-        buttonContent.evaluate((b) => b.click());
+        buttonContent.click();
+        await new Promise(function(resolve) {setTimeout(resolve, 1000)});
       }
-    })
+    }
+
+
+  }    
   );
 
   await page.waitForTimeout(5000);
