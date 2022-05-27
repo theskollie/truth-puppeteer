@@ -7,6 +7,7 @@ import { reFollow, accounts, refollowFolks } from "./reFollow";
 import { login } from "./login";
 import { unfollow } from './unfollow';
 import { famousQuote } from './famousQuote';
+import {bulkUnfollow} from './bulkUnfollow';
 
 async function main() {
   const browser = await puppeteer.launch({
@@ -17,6 +18,7 @@ async function main() {
 
   console.log(`%c Script Starting! No further inputs required.`, "color: red");
   const page = await browser.newPage();
+
   await login(page);
 
   for (let i = 0; i < accounts.length; i++) {
@@ -43,13 +45,6 @@ async function main() {
       await reFollow(page);
       runCount++;
       // if (runCount % 2 === 0) {
-        console.log("Switching to Unfollow");
-        await unfollow(page);
-        await page.waitForTimeout(2000);
-        await unfollow(page);
-        await page.waitForTimeout(2000);
-        await unfollow(page);
-        await page.waitForTimeout(2000);
       // }
       console.log(
         `Run Count: ${runCount}/${process.env.FOLLOWCOUNT}`
@@ -68,9 +63,12 @@ async function main() {
       await randomSentence(page);
     }
     console.log(`Switching to Follow`);
+    console.log("Switching to Unfollow");
+    await bulkUnfollow(process.env.TRUTHUSER as string, page)
+
     runLoop(!famous);
   };
-  //Start Initial Script
+  // Start Initial Script
   runLoop(false);
 }
 
