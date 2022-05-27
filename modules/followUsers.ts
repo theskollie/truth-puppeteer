@@ -17,10 +17,11 @@ export const followUsers = async (page: Page, user: string) => {
       if (userPhoto && userPhoto.src !== "https://truthsocial.com/avatars/original/missing.png") {
         if (button && button.textContent !== "Unfollow") {
           button.click();
+          await page.waitForTimeout(1000);
         }
       }
     })
   );
-  console.log("Followed from Recent 10 with Profile Pictures");
+  console.log(`Followed from Recent 10 with Profile Pictures from ${user}`);
   await page.waitForTimeout(5000);
 }
