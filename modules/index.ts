@@ -45,8 +45,6 @@ async function main() {
       await reFollow(page);
       runCount++;
       // if (runCount % 2 === 0) {
-        console.log("Switching to Unfollow");
-        await bulkUnfollow(process.env.TRUTHUSER as string, page)
       // }
       console.log(
         `Run Count: ${runCount}/${process.env.FOLLOWCOUNT}`
@@ -65,6 +63,9 @@ async function main() {
       await randomSentence(page);
     }
     console.log(`Switching to Follow`);
+    console.log("Switching to Unfollow");
+    await bulkUnfollow(process.env.TRUTHUSER as string, page)
+
     runLoop(!famous);
   };
   // Start Initial Script
