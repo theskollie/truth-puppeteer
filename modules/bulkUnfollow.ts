@@ -1,23 +1,24 @@
 import { Page } from "puppeteer";
 import { unfollow } from "./unfollow";
 
-const getFollowingCount = async (page: Page) =>{
-  await page.goto(`https://truthsocial.com/@uglytrump`);
-  await page.waitForSelector('a[href="/@uglytrump/following"] > div > p:nth-child(1)');
+const getFollowingCount = async (runningUser: string, page: Page) =>{
+  await page.goto(`https://truthsocial.com/@${runningUser}`);
+  await page.waitForSelector(`a[href="/@${runningUser}/following"] > div > p:nth-child(1)`);
   const followers = await page.evaluate(() => {
-    const selector = document.querySelector('a[href="/@uglytrump/following"] > div > p:nth-child(1)');
+    const selector = document.querySelector(`a[href="/@${runningUser}/following"] > div > p:nth-child(1)`);
     if(selector) return selector.textContent
     return;
   });
+
 
   return followers
 }
 const bulkUnfollow = async (runningUser: string, page: Page) => {
 
   await page.goto(`https://truthsocial.com/@${runningUser}`);
-  await page.waitForSelector('a[href="/@${runningUser}/following"] > div > p:nth-child(1)');
+  await page.waitForSelector(`a[href="/@${runningUser}/following"] > div > p:nth-child(1)`);
   const followers = await page.evaluate(() => {
-    const selector = document.querySelector('a[href="/@${runningUser}/following"] > div > p:nth-child(1)');
+    const selector = document.querySelector(`a[href="/@${runningUser}/following"] > div > p:nth-child(1)`);
     if(selector) return selector.textContent
     return;
   });
@@ -34,7 +35,7 @@ const bulkUnfollow = async (runningUser: string, page: Page) => {
   for(let i = 0; i < unfollowLoopCount ; i += 1){
     await unfollow(page);
     await page.waitForTimeout(2000);
-    nowFollowers = await getFollowingCount(page) as string;
+    nowFollowers = await getFollowingCount(runningUser, page) as string;
     console.log(`Unfollowed ${Number(priorLoopCount) - Number(nowFollowers)}`)
     priorLoopCount = nowFollowers;
 

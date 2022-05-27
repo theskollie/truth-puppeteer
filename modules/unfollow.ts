@@ -26,8 +26,6 @@ export const unfollow = async (page: Page) => {
         await new Promise(function(resolve) {setTimeout(resolve, 1000)});
       }
     }
-
-
   }    
   );
 
