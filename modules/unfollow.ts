@@ -20,8 +20,7 @@ export const unfollow = async (page: Page) => {
       if (!user) return;
       const buttonContent = user.querySelector('button');
       if (buttonContent && buttonContent.textContent === 'Unfollow') {
-        // @ts-ignore
-        buttonContent.evaluate((b) => b.click());
+        buttonContent.click();
       }
     })
   );

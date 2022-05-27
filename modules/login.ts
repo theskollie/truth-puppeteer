@@ -1,4 +1,5 @@
 import { Page } from "puppeteer";
+import { logger } from './logger';
 
 
 export async function login(page: Page) {
@@ -11,5 +12,5 @@ export async function login(page: Page) {
   await page.click(".flex.justify-end [data-testid=button]");
   await page.waitForSelector(".mt-4 button");
   await page.waitForTimeout(3000);
-  console.log("Login Successful");
+  logger("info", "Login Successful");
 }

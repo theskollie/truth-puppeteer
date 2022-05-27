@@ -1,4 +1,5 @@
 import { Page } from 'puppeteer';
+import { logger } from './logger';
 
 
 export const followUsers = async (page: Page, user: string) => {
@@ -22,6 +23,6 @@ export const followUsers = async (page: Page, user: string) => {
       }
     })
   );
-  console.log(`Followed from Recent 10 with Profile Pictures from ${user}`);
+  logger('info', `Followed from Recent 10 with Profile Pictures from ${user}`);
   await page.waitForTimeout(5000);
 }

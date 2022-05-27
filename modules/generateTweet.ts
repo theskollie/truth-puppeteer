@@ -1,4 +1,5 @@
 import { Page } from "puppeteer";
+import { logger } from './logger';
 
 export async function randomSentence(page: Page) {
   async function getRandomQuote() {
@@ -9,7 +10,7 @@ export async function randomSentence(page: Page) {
       "h2.wow",
       (sentence) => sentence.textContent
     );
-    console.log(randomSentence);
+    logger("info", randomSentence);
     return randomSentence;
   }
 
@@ -30,5 +31,5 @@ export async function randomSentence(page: Page) {
   await page.waitForTimeout(1000);
   await page.goto(`https://truthsocial.com/@${process.env.TRUTHUSER}`);
   await page.waitForTimeout(1000);
-  console.log(`Tweet Posted Successfully`);
+  logger("info", `Tweet Posted Successfully`);
 }

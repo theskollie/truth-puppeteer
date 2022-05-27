@@ -1,5 +1,5 @@
-// import fetch from 'node-fetch';
 import { Page } from 'puppeteer';
+import { logger } from './logger';
 
 
 async function fetchQuote() {
@@ -11,7 +11,7 @@ async function fetchQuote() {
 export async function famousQuote(page: Page) {
 
   const randomSentence = await fetchQuote();
-  console.log(`${randomSentence} - Donald Trump #Truth`);
+  logger("info", `${randomSentence} - Donald Trump #Truth`);
   await page.goto(`https://truthsocial.com/@${process.env.TRUTHUSER}`);
   const compose = await page.waitForSelector(".mt-4 button");
 
@@ -28,6 +28,6 @@ export async function famousQuote(page: Page) {
   await page.waitForTimeout(1000);
   await page.goto(`https://truthsocial.com/@${process.env.TRUTHUSER}`);
   await page.waitForTimeout(1000);
-  console.log(`Tweet Posted Successfully`);
+  logger("info", `Tweet Posted Successfully`);
 
 }
