@@ -11,10 +11,9 @@ import { logger } from "./logger";
 
 async function main() {
   const browser = await puppeteer.launch({
-    headless: false,
-    args: ["--window-size=1920,1080", "--disable-site-isolation-trials"],
-    defaultViewport: null,
-
+    // headless: false,
+    // args: ["--window-size=1920,1080", "--disable-site-isolation-trials"],
+    // defaultViewport: null,
     //ARM Based Systems
     // executablePath: '/usr/bin/chromium-browser',
     // args: ['--no-sandbox', '--disable-setuid-sandbox']
