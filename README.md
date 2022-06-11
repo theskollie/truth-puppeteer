@@ -51,6 +51,14 @@ If you'd like to see the browser, add these arguments to puppeteer.launch: <br/>
 Entire build is run locally on your PC. <br/>
 No information is uploaded/share so you can safely input your username and password in a .env file
 
+## Limitations
+
+Do not browse Truth while the script is running - Even in another browser. Since the script is using a lot of actions per second, Truth will rate limit you if you are also interacting with the site while it is running. You can manually reduce actions per second in the script or just browse very lightly while script runs.
+
+## Rate Limited?
+
+If Truth has rate limited you (you exceeded max actions per second), your account will have a cooldown period. Wait around 10-15 minutes and restart the script.
+
 ## Liability
 
 This is just a social experiment and is not intended to be abused. If you work at Truth and want this taken down/fixed, hire me.
